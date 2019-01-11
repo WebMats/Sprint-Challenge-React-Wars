@@ -37,18 +37,11 @@ class App extends Component {
   }
 
   render() {
-    let characters = null
-    if (this.state.starwarsChars.length !== 0) {
-      characters = this.state.starwarsChars.map(char => <li key={new Date(char.created).valueOf()}><StarWarsList>{char.name}</StarWarsList></li>)
-    }
+    let loading = this.state.starwarsChars.length === 0;
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-        <ul>
-          {characters}
-        </ul>
-        <button onClick={() => this.getMoreCharacterDataHandler(this.state.next)}>Get More Characters</button>
-        {this.state.prev === null ? null : <button onClick={() => this.getMoreCharacterDataHandler(this.state.prev)}>Get Prev Characters</button>}
+        {loading ? null : <StarWarsList prev={this.state.prev} next={this.state.next} getMore={this.getCharacters} characters={this.state.starwarsChars} />}
       </div>
     );
   }
