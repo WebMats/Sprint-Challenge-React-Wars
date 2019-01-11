@@ -9,7 +9,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      next: '',
+      prev: ''
     };
   }
 
@@ -23,22 +25,30 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        this.setState({ starwarsChars: data.results, next: data.next, prev: data.previous });
       })
       .catch(err => {
         throw new Error(err);
       });
   };
 
+  getMoreCharacterDataHandler = (URL) => {
+    this.getCharacters(URL);
+  }
+
   render() {
     let characters = null
     if (this.state.starwarsChars.length !== 0) {
-      characters = this.state.starwarsChars.map(char => <StarWarsList key={new Date(char.created).valueOf()} >{char.name}</StarWarsList>)
+      characters = this.state.starwarsChars.map(char => <li key={new Date(char.created).valueOf()}><StarWarsList>{char.name}</StarWarsList></li>)
     }
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-        {characters}
+        <ul>
+          {characters}
+        </ul>
+        <button onClick={() => this.getMoreCharacterDataHandler(this.state.next)}>Get More Characters</button>
+        {this.state.prev === null ? null : <button onClick={() => this.getMoreCharacterDataHandler(this.state.prev)}>Get Prev Characters</button>}
       </div>
     );
   }
