@@ -1,8 +1,33 @@
 .App {
   text-align: center;
+  padding-top: 3rem;
 }
 .Header {
   color: #443e3e;
   text-shadow: 1px 1px 5px #fff;
+  font-size: 3rem;
 }
 /* write your parent styles in here for your App.js */
+
+
+button {
+  width: 15rem;
+  margin: 0 1rem;
+  height: 4rem;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  margin-top: 40px;
+}
+
+.NextBtn {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  font-weight: 700;
+}
+
+
+.PrevBtn {
+  background: linear-gradient(135deg, #2973e0, #7790e3);
+  color: white;
+  font-weight: 700;
+}
