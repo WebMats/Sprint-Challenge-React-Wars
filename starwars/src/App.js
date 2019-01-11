@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+
+import StarWarsList from './components/StarWarsList';
+
 import './App.css';
+
 
 class App extends Component {
   constructor() {
@@ -14,9 +18,6 @@ class App extends Component {
   }
 
   getCharacters = URL => {
-    // feel free to research what this code is doing.
-    // At a high level we are calling an API to fetch some starwars data from the open web.
-    // We then take that data and resolve it our state.
     fetch(URL)
       .then(res => {
         return res.json();
@@ -30,9 +31,14 @@ class App extends Component {
   };
 
   render() {
+    let characters = null
+    if (this.state.starwarsChars.length !== 0) {
+      characters = this.state.starwarsChars.map(char => <StarWarsList key={new Date(char.created).valueOf()} >{char.name}</StarWarsList>)
+    }
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
+        {characters}
       </div>
     );
   }
